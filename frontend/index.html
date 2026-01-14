@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>FabLab UPC Terrassa – Reserves</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>⚙️ FabLab UPC Terrassa</h1>
+<p>Sistema de reserves de maquinària</p>
+
+<section class="card">
+    <h2>Nova reserva</h2>
+
+    <label>Email o ID UPC</label>
+    <input id="usuari" type="email" placeholder="nom@upc.edu">
+
+    <label>Servei</label>
+    <select id="servei">
+        <option>Talladora Làser</option>
+        <option>Fresadora CNC</option>
+        <option>Impressió 3D</option>
+    </select>
+
+    <label>Data</label>
+    <input id="data" type="date">
+
+    <label>Hora inici</label>
+    <input id="hora_inici" type="time">
+
+    <label>Hora fi</label>
+    <input id="hora_fi" type="time">
+
+    <button onclick="crearReserva()">Confirmar reserva</button>
+
+    <p id="missatge"></p>
+</section>
+
+<section class="card">
+    <h2>Reserves existents</h2>
+    <button onclick="carregarReserves()">Actualitzar</button>
+    <ul id="llista"></ul>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
