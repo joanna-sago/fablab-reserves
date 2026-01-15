@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:8000";
+const API_URL = "https://fablab-backend-zk8n.onrender.com";
+
 
 function crearReserva() {
     const reserva = {
