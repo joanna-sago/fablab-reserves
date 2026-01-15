@@ -74,6 +74,18 @@ class Reserva(ReservaBase):
     class Config:
         from_attributes = True
 
+class ReservaRead(BaseModel):
+    id: str
+    usuari_id: str
+    servei: str
+    data: date
+    hora_inici: time
+    hora_fi: time
+
+    class Config:
+        from_attributes = True
+
+
 # --- DEPENDÈNCIES ---
 def get_db():
     db = SessionLocal()
@@ -107,7 +119,7 @@ def estat_api():
         "horari_limit": "09:00 - 13:30"
     }
 
-@app.get("/reserves", response_model=List[Reserva], tags=["Reserves"])
+@app.get("/reserves", response_model=List[ReservaRead], tags=["Reserves"])
 def llistar_reserves(
     servei: Optional[str] = None, 
     data: Optional[date] = None, 
