@@ -6,12 +6,45 @@ document.addEventListener("DOMContentLoaded", async function () {
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         locale: "ca",
+
         headerToolbar: {
             left: "prev,next today",
             center: "title",
             right: "dayGridMonth,timeGridWeek"
         },
-        events: await carregarReserves()
+
+        events: await carregarReserves(),
+
+        eventMouseEnter: function(info) {
+            const tooltip = document.createElement("div");
+            tooltip.className = "fc-tooltip";
+            tooltip.innerHTML = `
+                <strong>${info.event.title}</strong><br>
+                🕒 ${info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                – ${info.event.end.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+            `;
+
+            document.body.appendChild(tooltip);
+
+            info.el.addEventListener("mousemove", function(e) {
+                tooltip.style.left = e.pageX + 10 + "px";
+                tooltip.style.top = e.pageY + 10 + "px";
+            });
+
+            info.el.addEventListener("mouseleave", function() {
+                tooltip.remove();
+            });
+        },
+
+        eventDidMount: function(info) {
+            info.el.addEventListener("dblclick", function() {
+                alert(
+                    "Servei i usuari: " + info.event.title + "\n" +
+                    "Inici: " + info.event.start.toLocaleString() + "\n" +
+                    "Fi: " + info.event.end.toLocaleString()
+                );
+            });
+        }
     });
 
     calendar.render();
